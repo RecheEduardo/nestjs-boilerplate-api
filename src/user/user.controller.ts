@@ -1,4 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Delete } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -13,6 +14,13 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
+  @ApiOperation({
+    operationId: 'findAllUsers',
+    summary: 'Método de busca de todos os usuários',
+  })
+  @ApiOkResponse({
+    description: 'Lista de usuários retornada com sucesso',
+  })
   @Get()
   findAll() {
     return this.userService.findAll();
